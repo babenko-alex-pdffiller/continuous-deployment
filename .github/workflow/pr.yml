@@ -1,13 +1,8 @@
-name: PHP Composer
+name: PR CI
 
 on:
-  push:
-    branches: [ "master" ]
   pull_request:
-    branches: [ "master" ]
-
-permissions:
-  contents: read
+    types: [opened, synchronize, reopened]
 
 jobs:
   build:
