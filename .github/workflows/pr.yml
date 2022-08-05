@@ -17,7 +17,6 @@ jobs:
         run: composer validate --strict
 
       - name: Cache Composer packages
-        working-directory: ./public
         id: composer-cache
         uses: actions/cache@v3
         with:
@@ -25,6 +24,7 @@ jobs:
           key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-php-
+        working-directory: ./public
 
       - name: Install dependencies
         working-directory: ./public
