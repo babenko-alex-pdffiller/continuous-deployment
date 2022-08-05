@@ -1,10 +1,13 @@
 name: Deploy to Amazon ECS
 
-on:
-  push:
-    branches:
-      - "master"
+#on:
+#  push:
+#    branches:
+#      - "master"
 
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
 env:
   AWS_REGION: eu-central-1
   ECR_REPOSITORY: test-ci-cd

@@ -2,9 +2,7 @@ version: '3.6'
 services:
 
   php:
-    build:
-      context: .
-      dockerfile: php.Dockerfile
+    build: .
     container_name: php-fpm-l22
     volumes:
       - ./public:/var/www
