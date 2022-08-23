@@ -1,13 +1,8 @@
-name: PHP Composer
+name: PR CI
 
 on:
-  push:
-    branches: [ "master" ]
   pull_request:
-    branches: [ "master" ]
-
-permissions:
-  contents: read
+    types: [opened, synchronize, reopened]
 
 jobs:
   build:
@@ -16,9 +11,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Validate composer.json and composer.lock
-        run: composer validate --strict
 
       - name: Cache Composer packages
         id: composer-cache
@@ -30,7 +22,9 @@ jobs:
             ${{ runner.os }}-php-
 
       - name: Install dependencies
+        working-directory: ./public
         run: composer install --prefer-dist --no-progress
 
       - name: Run test
-       run: ./vendor/bin/phpunit Test.php
+        working-directory: ./public
+        run: ./vendor/bin/phpunit Test.php
